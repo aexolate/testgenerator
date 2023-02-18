@@ -24,14 +24,14 @@ public class TestGenerator {
         // Customizable Parameters
         int NUM_INSTRUMENTS = 10; // Up to 500
         int NUM_CLIENTTHREADS = 4; // Basic = 1, Medium = 4. Hard = 40
-        int AVG_CMDS_PER_INSTR = 20; // Expect 10k-50k per instrument
+        int AVG_CMDS_PER_INSTR = 30; // Expect 10k-50k per instrument
         int MIN_PRICE = 300;
         int MAX_PRICE = 400;
         int MIN_COUNT = 5;
         int MAX_COUNT = 80;
 
         // Less important customisable parameter
-        int STARTING_ORDER_ID = 100;
+        int STARTING_ORDER_ID = 95;
         boolean INCLUDE_CANCEL_ORDERS = true;
         boolean INCLUDE_BARRIERS = false;
         double CANCEL_CHANCE = 0.35; // Chance a cancel order will be generated
@@ -41,7 +41,6 @@ public class TestGenerator {
         String OUTPUT_FILE = "test.in";
 
         // Setup variables
-        int _incl_cancel = INCLUDE_CANCEL_ORDERS ? 1 : 0;
         List<String> instruments = new ArrayList<>(); // Contains all the instruments available in the run
         char[] ORDERTYPES = { 'S', 'B', 'C' };
         HashMap<Integer, Integer> order_thread = new HashMap<>(); // Maps the orderID to the thread number
@@ -58,6 +57,7 @@ public class TestGenerator {
         System.out.println("Generating " + NUM_CMDS + " orders");
         if (NUM_CMDS > 1000000) {
             System.out.println("Warning: Large file will be generated, proceeding in 3s.");
+            System.out.println("Warning: Expected file size >" + Long.toString(Math.round((NUM_CMDS/100000)*2.8)) + "MB");
             Thread.sleep(3000);
         }
 
